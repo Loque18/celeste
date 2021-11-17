@@ -1,21 +1,43 @@
 {
-  "name": "celeste",
-  "version": "0.1.0",
-  "private": true,
+  "name": "celeste-framework",
+  "description": "a web3 framework for common dapp functionallity",
+  "author": "Loque",
+  "keywords": [
+    "web3",
+    "dapp",
+    "connect button"
+  ],
+  "version": "0.8.0",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loque18/celeste.git"
+  },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "prop-types": "^15.7.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
+    "web-vitals": "^1.1.2",
+    "web3": "^1.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "babel src/lib --out-dir dist --copy-files",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rmdir /s dist",
+    "compile": "cross-env NODE_ENV=development babel src/lib --out-dir dist --copy-files",
+    "watch": "watch 'npm run compile' ./src"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +56,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "cross-env": "^7.0.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3"
   }
 }

@@ -1,0 +1,24 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _redux = require("redux");
+
+var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
+
+var _walletReducer = _interopRequireDefault(require("./reducers/walletReducer"));
+
+var _web3Reducer = _interopRequireDefault(require("./reducers/web3Reducer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const reducer = (0, _redux.combineReducers)({
+  web3: _web3Reducer.default,
+  wallet: _walletReducer.default
+});
+const store = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk.default));
+var _default = store;
+exports.default = _default;
