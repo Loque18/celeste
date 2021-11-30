@@ -1,9 +1,9 @@
 import {
     // REQUEST_CONNECTION,
     SET_NETWORK_ID,
-    SET_METAMASK_INSTALLED,
+    SET_WALLET,
     SET_CURRENT_ACCOUNT,
-    SET_CONNECTION
+    SET_LOGIN_STATUS
 } from '../constants';
 
 
@@ -14,9 +14,9 @@ export const set_networkd_id = id => {
     };
 }
 
-export const set_metamask_installed = value => {
+export const set_wallet = value => {
     return{
-        type: SET_METAMASK_INSTALLED,
+        type: SET_WALLET,
         payload: value
     };
 }
@@ -28,9 +28,9 @@ export const set_current_account = address => {
     };
 }
 
-export const set_connection = value => {
+export const set_login_status = value => {
     return{
-        type: SET_CONNECTION,
+        type: SET_LOGIN_STATUS,
         payload: value
     };
 }
@@ -39,15 +39,16 @@ export const request_connection = () => {
 
     return async (dispatch, getState) => {
 
-        console.log('ok');
-        
         const ethereum = window.ethereum;
 
-        const {web3} = getState().web3;
+        const {web3} = getState().web3Reducer;
+
+        
+
 
         try {
             await ethereum.request({ method: 'eth_requestAccounts' });
-            dispatch( set_connection(true) );
+            dispatch( set_login_status(true) );
             dispatch( set_networkd_id( await web3.eth.getChainId() ) );
         } catch (e) {
             //throw e;
@@ -57,8 +58,7 @@ export const request_connection = () => {
 
 export const request_change_network = (networkId) => {
     return async (dispatch, getState) => {
-
-        const hex = networkId.toString(16);
+        
         try {
             await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',

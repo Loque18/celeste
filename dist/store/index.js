@@ -15,10 +15,10 @@ var _web3Reducer = _interopRequireDefault(require("./reducers/web3Reducer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const reducer = (0, _redux.combineReducers)({
+var reducer = (0, _redux.combineReducers)({
   web3: _web3Reducer.default,
   wallet: _walletReducer.default
 });
-const store = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk.default));
+var store = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk.default));
 var _default = store;
 exports.default = _default;

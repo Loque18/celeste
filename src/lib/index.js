@@ -1,22 +1,47 @@
-
-import store from './store';
+/* *~~*~~*~~*~~*~~*~~*~~*~~*~~* internals *~~*~~*~~*~~*~~*~~*~~*~~*~~*~~* */ 
+import {add_contract, set_initialized} from './store/actions/web3Actions';
 import { initWeb3 } from './web3';
 
+/* *~~*~~*~~*~~*~~*~~*~~*~~*~~* export *~~*~~*~~*~~*~~*~~*~~*~~*~~*~~* */ 
 import CelesteProvider from './components/celeste-provider';
 import ConnectButton from './components/connect-button';
-initWeb3(store);
+import ConnectedWrapper from './components/connected-wrapper';
+import NetworkWrapper from './components/network-wrapper';
+import {useCelesteStore, useCelesteDispatch, useCelesteSelector} from './components/celeste-provider';
+
+
+const initCeleste = async (options) => {
+
+    const celesteStore = await initWeb3();
+
+    const web3 = celesteStore.getState().web3Reducer.web3;
+    
+
+    if(options.smartContracts) {
+        
+        options.smartContracts.forEach(sc => {
+
+            const contract = new web3.eth.Contract(sc.abi, sc.address);
+            celesteStore.dispatch( add_contract(sc.key, contract) );
+        });        
+    }
+
+    celesteStore.dispatch(set_initialized(true));
+
+};
 
 
 
 
+export { 
+    initCeleste,
+    CelesteProvider,
+    ConnectButton,
+    ConnectedWrapper,
+    NetworkWrapper,
+    useCelesteStore,
+    useCelesteDispatch,
+    useCelesteSelector
+ };
 
-export { CelesteProvider, ConnectButton };
-
-// import react from 'react';
-// import ReactDOM from 'react-dom';
-// import Button from 'lib/components/button';
-
-// ReactDOM.render(
-//     <Button />,
-//     document.getElementById('root')
-// );
+ 

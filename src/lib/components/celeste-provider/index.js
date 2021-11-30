@@ -10,14 +10,12 @@ import {
 const MyContext = React.createContext(null);
 
 // Export your custom hooks if you wish to use them in other files.
-export const useStore = createStoreHook(MyContext);
-export const useDispatch = createDispatchHook(MyContext);
-export const useSelector = createSelectorHook(MyContext);
+export const useCelesteStore = createStoreHook(MyContext);
+export const useCelesteDispatch = createDispatchHook(MyContext);
+export const useCelesteSelector = createSelectorHook(MyContext);
 
 const CelesteProvider= props => {
-
     
-
     return (
         <Provider context={MyContext} store={store}>
             {props.children}

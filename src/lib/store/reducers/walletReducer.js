@@ -1,26 +1,26 @@
 import {
     // REQUEST_CONNECTION,
-    SET_METAMASK_INSTALLED,
+    SET_WALLET,
     SET_NETWORK_ID,
     SET_CURRENT_ACCOUNT,
-    SET_CONNECTION
+    SET_LOGIN_STATUS,
 } from '../constants';
 
 const defaultState = {
-    isMetamaskInstalled: false,
-    currentAccount: '',
+    walletProvider: null,
+    currentAccount: null,
     networkId: null,
-    isConnected: false
+    isLoggedIn: false
 };
 
 const reducer = (state = defaultState, action) => {
 
     switch (action.type) {
 
-        case SET_METAMASK_INSTALLED:
+        case SET_WALLET:
             return{
                 ...state,
-                isMetamaskInstalled: action.payload
+                walletProvider: action.payload
             };
 
         case SET_NETWORK_ID:
@@ -35,10 +35,10 @@ const reducer = (state = defaultState, action) => {
                 currentAccount: action.payload
             };
 
-        case SET_CONNECTION:
+        case SET_LOGIN_STATUS:
             return{
                 ...state,
-                isConnected: action.payload
+                isLoggedIn: action.payload
             };
 
         default:

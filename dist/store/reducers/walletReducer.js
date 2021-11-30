@@ -7,41 +7,46 @@ exports.default = void 0;
 
 var _constants = require("../constants");
 
-const defaultState = {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var defaultState = {
   isMetamaskInstalled: false,
   currentAccount: '',
   networkId: null,
   isConnected: false
 };
 
-const reducer = function () {
-  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-  let action = arguments.length > 1 ? arguments[1] : undefined;
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case _constants.SET_METAMASK_INSTALLED:
-      return { ...state,
+      return _objectSpread(_objectSpread({}, state), {}, {
         isMetamaskInstalled: action.payload
-      };
+      });
 
     case _constants.SET_NETWORK_ID:
-      return { ...state,
+      return _objectSpread(_objectSpread({}, state), {}, {
         networkId: action.payload
-      };
+      });
 
     case _constants.SET_CURRENT_ACCOUNT:
-      return { ...state,
+      return _objectSpread(_objectSpread({}, state), {}, {
         currentAccount: action.payload
-      };
+      });
 
     case _constants.SET_CONNECTION:
-      return { ...state,
+      return _objectSpread(_objectSpread({}, state), {}, {
         isConnected: action.payload
-      };
+      });
 
     default:
-      return { ...state
-      };
+      return _objectSpread({}, state);
   }
 };
 
