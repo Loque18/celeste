@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.set_networkd_id = exports.set_metamask_installed = exports.set_current_account = exports.set_connection = exports.request_connection = exports.request_change_network = void 0;
+exports.set_wallet = exports.set_networkd_id = exports.set_login_status = exports.set_current_account = exports.request_connection = exports.request_change_network = void 0;
 
 var _constants = require("../constants");
 
@@ -20,14 +20,14 @@ var set_networkd_id = function set_networkd_id(id) {
 
 exports.set_networkd_id = set_networkd_id;
 
-var set_metamask_installed = function set_metamask_installed(value) {
+var set_wallet = function set_wallet(value) {
   return {
-    type: _constants.SET_METAMASK_INSTALLED,
+    type: _constants.SET_WALLET,
     payload: value
   };
 };
 
-exports.set_metamask_installed = set_metamask_installed;
+exports.set_wallet = set_wallet;
 
 var set_current_account = function set_current_account(address) {
   return {
@@ -38,14 +38,14 @@ var set_current_account = function set_current_account(address) {
 
 exports.set_current_account = set_current_account;
 
-var set_connection = function set_connection(value) {
+var set_login_status = function set_login_status(value) {
   return {
-    type: _constants.SET_CONNECTION,
+    type: _constants.SET_LOGIN_STATUS,
     payload: value
   };
 };
 
-exports.set_connection = set_connection;
+exports.set_login_status = set_login_status;
 
 var request_connection = function request_connection() {
   return /*#__PURE__*/function () {
@@ -55,39 +55,38 @@ var request_connection = function request_connection() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log('ok');
               ethereum = window.ethereum;
-              web3 = getState().web3.web3;
-              _context.prev = 3;
-              _context.next = 6;
+              web3 = getState().web3Reducer.web3;
+              _context.prev = 2;
+              _context.next = 5;
               return ethereum.request({
                 method: 'eth_requestAccounts'
               });
 
-            case 6:
-              dispatch(set_connection(true));
+            case 5:
+              dispatch(set_login_status(true));
               _context.t0 = dispatch;
               _context.t1 = set_networkd_id;
-              _context.next = 11;
+              _context.next = 10;
               return web3.eth.getChainId();
 
-            case 11:
+            case 10:
               _context.t2 = _context.sent;
               _context.t3 = (0, _context.t1)(_context.t2);
               (0, _context.t0)(_context.t3);
-              _context.next = 18;
+              _context.next = 17;
               break;
 
-            case 16:
-              _context.prev = 16;
-              _context.t4 = _context["catch"](3);
+            case 15:
+              _context.prev = 15;
+              _context.t4 = _context["catch"](2);
 
-            case 18:
+            case 17:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[3, 16]]);
+      }, _callee, null, [[2, 15]]);
     }));
 
     return function (_x, _x2) {
@@ -101,14 +100,12 @@ exports.request_connection = request_connection;
 var request_change_network = function request_change_network(networkId) {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState) {
-      var hex;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              hex = networkId.toString(16);
-              _context2.prev = 1;
-              _context2.next = 4;
+              _context2.prev = 0;
+              _context2.next = 3;
               return window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{
@@ -117,21 +114,21 @@ var request_change_network = function request_change_network(networkId) {
 
               });
 
-            case 4:
-              _context2.next = 9;
+            case 3:
+              _context2.next = 8;
               break;
 
-            case 6:
-              _context2.prev = 6;
-              _context2.t0 = _context2["catch"](1);
+            case 5:
+              _context2.prev = 5;
+              _context2.t0 = _context2["catch"](0);
               console.log("ERROR REQUESTING CHANGE NETWORK", _context2.t0);
 
-            case 9:
+            case 8:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 6]]);
+      }, _callee2, null, [[0, 5]]);
     }));
 
     return function (_x3, _x4) {

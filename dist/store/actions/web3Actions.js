@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.set_web3_instance = exports.add_contract = void 0;
+exports.set_web3_instance = exports.set_initialized = exports.add_contract = void 0;
 
 var _constants = require("../constants");
 
@@ -27,3 +27,12 @@ var add_contract = function add_contract(key, contractInstance) {
 };
 
 exports.add_contract = add_contract;
+
+var set_initialized = function set_initialized(value) {
+  return {
+    type: _constants.SET_INITIALIZED,
+    payload: value
+  };
+};
+
+exports.set_initialized = set_initialized;

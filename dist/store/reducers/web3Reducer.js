@@ -26,8 +26,7 @@ var reducer = function reducer() {
   switch (action.type) {
     case _constants.SET_WEB3_INSTANCE:
       return _objectSpread(_objectSpread({}, state), {}, {
-        web3: action.payload,
-        initialized: true
+        web3: action.payload
       });
 
     case _constants.ADD_CONTRACT:
@@ -36,6 +35,11 @@ var reducer = function reducer() {
       contracts[action.payload.key] = action.payload.contract;
       return _objectSpread(_objectSpread({}, state), {}, {
         contracts: contracts
+      });
+
+    case _constants.SET_INITIALIZED:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        initialized: action.payload
       });
 
     default:

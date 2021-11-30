@@ -14,10 +14,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var defaultState = {
-  isMetamaskInstalled: false,
-  currentAccount: '',
+  walletProvider: null,
+  currentAccount: null,
   networkId: null,
-  isConnected: false
+  isLoggedIn: false
 };
 
 var reducer = function reducer() {
@@ -25,9 +25,9 @@ var reducer = function reducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _constants.SET_METAMASK_INSTALLED:
+    case _constants.SET_WALLET:
       return _objectSpread(_objectSpread({}, state), {}, {
-        isMetamaskInstalled: action.payload
+        walletProvider: action.payload
       });
 
     case _constants.SET_NETWORK_ID:
@@ -40,9 +40,9 @@ var reducer = function reducer() {
         currentAccount: action.payload
       });
 
-    case _constants.SET_CONNECTION:
+    case _constants.SET_LOGIN_STATUS:
       return _objectSpread(_objectSpread({}, state), {}, {
-        isConnected: action.payload
+        isLoggedIn: action.payload
       });
 
     default:

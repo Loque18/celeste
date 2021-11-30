@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _celesteProvider = require("../celeste-provider");
+var _walletActions = require("../../store/actions/walletActions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19,16 +19,21 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var ConnectedWrapper = function ConnectedWrapper(props) {
-  var wallet = (0, _celesteProvider.useCelesteSelector)(function (state) {
-    return state.walletReducer;
-  });
-  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, wallet.isLoggedIn ? props.children : props.disconnectedComponent);
+var SwithNetworkButton = function SwithNetworkButton(props) {
+  var dispatch = useCelesteDispatch();
+
+  var onClick = function onClick() {
+    dispatch((0, _walletActions.request_change_network)(props.networkId));
+  };
+
+  return /*#__PURE__*/_react.default.createElement("button", {
+    className: props.className,
+    onClick: onClick
+  }, "Switch");
 };
 
-ConnectedWrapper.propTypes = {
-  connectedComponent: _propTypes.default.element.isRequired,
-  disconnectedComponent: _propTypes.default.element.isRequired
+SwithNetworkButton.propTypes = {
+  networkId: _propTypes.default.number.isRequired
 };
-var _default = ConnectedWrapper;
+var _default = SwithNetworkButton;
 exports.default = _default;

@@ -16,8 +16,8 @@ var _web3Reducer = _interopRequireDefault(require("./reducers/web3Reducer"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducer = (0, _redux.combineReducers)({
-  web3: _web3Reducer.default,
-  wallet: _walletReducer.default
+  web3Reducer: _web3Reducer.default,
+  walletReducer: _walletReducer.default
 });
 var store = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk.default));
 var _default = store;

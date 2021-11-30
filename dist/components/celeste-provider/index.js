@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.useStore = exports.useSelector = exports.useDispatch = exports.default = void 0;
+exports.useCelesteStore = exports.useCelesteSelector = exports.useCelesteDispatch = exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -16,12 +16,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MyContext = /*#__PURE__*/_react.default.createContext(null); // Export your custom hooks if you wish to use them in other files.
 
 
-var useStore = (0, _reactRedux.createStoreHook)(MyContext);
-exports.useStore = useStore;
-var useDispatch = (0, _reactRedux.createDispatchHook)(MyContext);
-exports.useDispatch = useDispatch;
-var useSelector = (0, _reactRedux.createSelectorHook)(MyContext);
-exports.useSelector = useSelector;
+var useCelesteStore = (0, _reactRedux.createStoreHook)(MyContext);
+exports.useCelesteStore = useCelesteStore;
+var useCelesteDispatch = (0, _reactRedux.createDispatchHook)(MyContext);
+exports.useCelesteDispatch = useCelesteDispatch;
+var useCelesteSelector = (0, _reactRedux.createSelectorHook)(MyContext);
+exports.useCelesteSelector = useCelesteSelector;
 
 var CelesteProvider = function CelesteProvider(props) {
   return /*#__PURE__*/_react.default.createElement(_reactRedux.Provider, {

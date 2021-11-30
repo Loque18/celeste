@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _walletActions = require("../../store/actions/walletActions");
-
 var _celesteProvider = require("../celeste-provider");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -22,24 +20,16 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var NetworkWrapper = function NetworkWrapper(props) {
-  var _useSelector = (0, _celesteProvider.useSelector)(function (state) {
+  var _useCelesteSelector = (0, _celesteProvider.useCelesteSelector)(function (state) {
     return state;
   }),
-      wallet = _useSelector.wallet;
+      walletReducer = _useCelesteSelector.walletReducer;
 
-  var dispatch = (0, _celesteProvider.useDispatch)();
-
-  var onSwitchNetwork = function onSwitchNetwork() {
-    dispatch((0, _walletActions.request_change_network)(props.network));
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, wallet.networkId === props.network ? props.children : /*#__PURE__*/_react.default.createElement("div", null, props.info || /*#__PURE__*/_react.default.createElement("button", {
-    onClick: onSwitchNetwork
-  }, "Switch Network")));
+  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, walletReducer.networkId === props.networkId ? props.children : /*#__PURE__*/_react.default.createElement("div", null, props.info));
 };
 
 NetworkWrapper.propTypes = {
-  network: _propTypes.default.number.isRequired,
+  networkId: _propTypes.default.number.isRequired,
   info: _propTypes.default.string
 };
 var _default = NetworkWrapper;

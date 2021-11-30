@@ -11,7 +11,7 @@ const ConnectedWrapper = props => {
         <Fragment>
             {
                 wallet.isLoggedIn ?
-                    props.connectedComponent
+                    props.children
                 :
                     props.disconnectedComponent
             }            

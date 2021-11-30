@@ -20,19 +20,19 @@ var getAddressReduced = function getAddressReduced(address) {
 };
 
 var ConnectBtn = function ConnectBtn(props) {
-  var dispatch = (0, _celesteProvider.useDispatch)();
-  var wallet = (0, _celesteProvider.useSelector)(function (state) {
-    return state.wallet;
+  var dispatch = (0, _celesteProvider.useCelesteDispatch)();
+  var wallet = (0, _celesteProvider.useCelesteSelector)(function (state) {
+    return state.walletReducer;
   });
 
   var onClick = function onClick(e) {
-    if (wallet.isMetamaskInstalled && !wallet.isConnected) dispatch((0, _walletActions.request_connection)());
+    if (!wallet.isLoggedIn) dispatch((0, _walletActions.request_connection)());
   };
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     className: props.className,
     onClick: onClick
-  }, wallet.isConnected && wallet.currentAccount != null ? getAddressReduced(wallet.currentAccount) : 'Connect'));
+  }, wallet.isLoggedIn && wallet.currentAccount != null ? getAddressReduced(wallet.currentAccount) : 'Connect'));
 };
 
 ConnectBtn.propTypes = {
