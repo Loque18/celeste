@@ -29,6 +29,12 @@ Object.defineProperty(exports, "NetworkWrapper", {
     return _networkWrapper.default;
   }
 });
+Object.defineProperty(exports, "SwitchNetworkButton", {
+  enumerable: true,
+  get: function get() {
+    return _switchNetworkButton.default;
+  }
+});
 exports.initCeleste = void 0;
 Object.defineProperty(exports, "useCelesteDispatch", {
   enumerable: true,
@@ -60,6 +66,8 @@ var _connectButton = _interopRequireDefault(require("./components/connect-button
 var _connectedWrapper = _interopRequireDefault(require("./components/connected-wrapper"));
 
 var _networkWrapper = _interopRequireDefault(require("./components/network-wrapper"));
+
+var _switchNetworkButton = _interopRequireDefault(require("./components/switch-network-button"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

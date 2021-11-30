@@ -30,7 +30,7 @@ var NetworkWrapper = function NetworkWrapper(props) {
 
 NetworkWrapper.propTypes = {
   networkId: _propTypes.default.number.isRequired,
-  info: _propTypes.default.string
+  info: _propTypes.default.element
 };
 var _default = NetworkWrapper;
 exports.default = _default;

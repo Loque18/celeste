@@ -21,7 +21,7 @@ const NetworkWrapper = props => {
 
 NetworkWrapper.propTypes = {
     networkId: PropTypes.number.isRequired,
-    info: PropTypes.string
+    info: PropTypes.element
 };
 
 export default NetworkWrapper;

@@ -7,6 +7,7 @@ import CelesteProvider from './components/celeste-provider';
 import ConnectButton from './components/connect-button';
 import ConnectedWrapper from './components/connected-wrapper';
 import NetworkWrapper from './components/network-wrapper';
+import SwitchNetworkButton from './components/switch-network-button';
 import {useCelesteStore, useCelesteDispatch, useCelesteSelector} from './components/celeste-provider';
 
 
@@ -39,6 +40,7 @@ export {
     ConnectButton,
     ConnectedWrapper,
     NetworkWrapper,
+    SwitchNetworkButton,
     useCelesteStore,
     useCelesteDispatch,
     useCelesteSelector

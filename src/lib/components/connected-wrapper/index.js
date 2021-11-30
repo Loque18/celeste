@@ -5,8 +5,7 @@ import { useCelesteSelector } from '../celeste-provider';
 const ConnectedWrapper = props => {
 
     const wallet = useCelesteSelector(state => state.walletReducer);
-
-
+    
     return(
         <Fragment>
             {
@@ -19,8 +18,7 @@ const ConnectedWrapper = props => {
     );
 }
 
-ConnectedWrapper.propTypes = {
-    connectedComponent: PropTypes.element.isRequired,
+ConnectedWrapper.propTypes = {    
     disconnectedComponent: PropTypes.element.isRequired    
 };
 

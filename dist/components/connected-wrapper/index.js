@@ -27,7 +27,6 @@ var ConnectedWrapper = function ConnectedWrapper(props) {
 };
 
 ConnectedWrapper.propTypes = {
-  connectedComponent: _propTypes.default.element.isRequired,
   disconnectedComponent: _propTypes.default.element.isRequired
 };
 var _default = ConnectedWrapper;
