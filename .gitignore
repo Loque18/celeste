@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 /src/temp
-/dist
+/dist/
 
 # testing
 /coverage

@@ -15,6 +15,7 @@ const initCeleste = async (options) => {
 
     const celesteStore = await initWeb3();
     
+    const web3 = celesteStore.getState().web3Reducer.web3;
 
     if(options.smartContracts) {
         
