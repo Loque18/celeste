@@ -26,8 +26,7 @@ const ConnectBtn = props => {
 }
 
 ConnectBtn.propTypes = {
-    className: PropTypes.string,
-    callback: PropTypes.func
+    className: PropTypes.string
 }    
 
 export default ConnectBtn;

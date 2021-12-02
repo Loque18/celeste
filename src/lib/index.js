@@ -21,9 +21,21 @@ const initCeleste = async (options) => {
         
         options.smartContracts.forEach(sc => {
 
-            const contract = new web3.eth.Contract(sc.abi, sc.address);
-            celesteStore.dispatch( add_contract(sc.key, contract) );           
-            
+            //make a contract instance
+            if(!sc.isMultichain){
+                const contract = new web3.eth.Contract(sc.abi, sc.address);
+                celesteStore.dispatch( add_contract(sc.key, contract) );           
+            }
+
+            //for multichain contracts make a contract instance for each address
+            else {
+                const chainId = Object.keys(sc.address);
+                
+                Object.values(sc.address).forEach((address, i) => {
+                    const contract = new web3.eth.Contract(sc.abi, address);
+                    celesteStore.dispatch( add_contract( `${sc.key}_${chainId[i]}`  , contract) );
+                });
+            }
         });        
     }
 
