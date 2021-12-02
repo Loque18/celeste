@@ -41,6 +41,8 @@ const initCeleste = async (options) => {
 
     celesteStore.dispatch(set_initialized(true));
 
+    return celesteStore;
+
 };
 
 export { 
