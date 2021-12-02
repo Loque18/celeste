@@ -14,7 +14,7 @@ const SwithNetworkButton = props => {
     
     return(
         <button className={props.className} onClick={onClick}>
-            Switch
+            {props.children}
         </button>
     );
 };

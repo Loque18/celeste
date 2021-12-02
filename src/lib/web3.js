@@ -7,6 +7,8 @@ import {
     set_networkd_id
 } from './store/actions/walletActions';
 
+
+
 import Web3 from 'web3';
 
 const initWeb3 = async () => {

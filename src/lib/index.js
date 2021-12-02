@@ -14,8 +14,6 @@ import {useCelesteStore, useCelesteDispatch, useCelesteSelector} from './compone
 const initCeleste = async (options) => {
 
     const celesteStore = await initWeb3();
-
-    const web3 = celesteStore.getState().web3Reducer.web3;
     
 
     if(options.smartContracts) {
@@ -23,16 +21,14 @@ const initCeleste = async (options) => {
         options.smartContracts.forEach(sc => {
 
             const contract = new web3.eth.Contract(sc.abi, sc.address);
-            celesteStore.dispatch( add_contract(sc.key, contract) );
+            celesteStore.dispatch( add_contract(sc.key, contract) );           
+            
         });        
     }
 
     celesteStore.dispatch(set_initialized(true));
 
 };
-
-
-
 
 export { 
     initCeleste,
@@ -44,6 +40,4 @@ export {
     useCelesteStore,
     useCelesteDispatch,
     useCelesteSelector
- };
-
- 
+ }; 

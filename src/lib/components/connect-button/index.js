@@ -18,7 +18,7 @@ const ConnectBtn = props => {
     return(
         <div>
             <button className={props.className} onClick={onClick}>
-                {wallet.isLoggedIn && wallet.currentAccount != null? getAddressReduced(wallet.currentAccount) : 'Connect'}                
+                {wallet.isLoggedIn && wallet.currentAccount != null? getAddressReduced(wallet.currentAccount) : props.children || 'Connect'}
             </button>
         </div>
     );
@@ -27,6 +27,7 @@ const ConnectBtn = props => {
 
 ConnectBtn.propTypes = {
     className: PropTypes.string,
+    callback: PropTypes.func
 }    
 
 export default ConnectBtn;
