@@ -7,10 +7,11 @@ const NetworkWrapper = props => {
 
     const {walletReducer} = useCelesteSelector(state => state);
     
+    
     return(
         <Fragment>
             {
-                walletReducer.networkId === props.networkId ?
+                props.chainIds.includes(walletReducer.networkId) ?
                     props.children
                 :
                     <div>{props.info}</div>
@@ -20,7 +21,7 @@ const NetworkWrapper = props => {
 };
 
 NetworkWrapper.propTypes = {
-    networkId: PropTypes.number.isRequired,
+    chainIds: PropTypes.array.isRequired,
     info: PropTypes.element
 };
 

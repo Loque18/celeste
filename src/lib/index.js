@@ -2,6 +2,7 @@
 import {add_contract, set_initialized} from './store/actions/web3Actions';
 import { initWeb3 } from './web3';
 
+
 /* *~~*~~*~~*~~*~~*~~*~~*~~*~~* export *~~*~~*~~*~~*~~*~~*~~*~~*~~*~~* */ 
 import CelesteProvider from './components/celeste-provider';
 import ConnectButton from './components/connect-button';
@@ -24,7 +25,7 @@ const initCeleste = async (options) => {
             //make a contract instance
             if(!sc.isMultichain){
                 const contract = new web3.eth.Contract(sc.abi, sc.address);
-                celesteStore.dispatch( add_contract(sc.key, contract) );           
+                celesteStore.dispatch( add_contract(sc.key, contract) );                
             }
 
             //for multichain contracts make a contract instance for each address
@@ -34,7 +35,7 @@ const initCeleste = async (options) => {
                 Object.values(sc.address).forEach((address, i) => {
                     const contract = new web3.eth.Contract(sc.abi, address);
                     celesteStore.dispatch( add_contract( `${sc.key}_${chainId[i]}`  , contract) );
-                });
+                });                
             }
         });        
     }
@@ -42,7 +43,6 @@ const initCeleste = async (options) => {
     celesteStore.dispatch(set_initialized(true));
 
     return celesteStore;
-
 };
 
 export { 
