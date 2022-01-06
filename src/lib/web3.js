@@ -1,19 +1,30 @@
 import store from './store';
-import {set_web3_instance} from './store/actions/web3Actions';
+import {
+    set_web3_instance,
+    set_web3_read_instance
+} from './store/actions/web3Actions';
 import {
     set_wallet,
     set_login_status,
-    set_current_account,
-    set_networkd_id
+    set_address,
+    set_chain_id
 } from './store/actions/walletActions';
 
+import Web3 from "web3/dist/web3.min";
 
+// import WalletConnect from "@walletconnect/client";
+// import QRCodeModal from "@walletconnect/qrcode-modal";
 
-import Web3 from 'web3';
+// Create a connector
+// const connector = new WalletConnect({
+//     bridge: "https://bridge.walletconnect.org", // Required
+//     qrcodeModal: QRCodeModal,
+// });
 
 const initWeb3 = async () => {
 
-    if(typeof window.ethereum !== 'undefined'){
+    /* injected */
+    if(typeof window !== 'undefined'){
 
         //1. get ethereum
         const ethereum = window.ethereum;
@@ -30,54 +41,59 @@ const initWeb3 = async () => {
         store.dispatch( set_web3_instance(web3) );
 
 
-        //detect if metamask is connected to site
+        //detect if wallet is connected to site
         const accArr = await web3.eth.getAccounts();
         if(accArr.length === 0) store.dispatch( set_login_status(false) );
         else{
              store.dispatch( set_login_status(true) );
-             store.dispatch( set_current_account(accArr[0]) );
-             store.dispatch( set_networkd_id( await web3.eth.getChainId() ) );
+             store.dispatch( set_address(accArr[0]) );
+             store.dispatch( set_chain_id( await web3.eth.getChainId() ) );
         }
 
         //listen to eth change events
         ethereum.on('accountsChanged', accounts => {
-
-            console.log(accounts);
             
             if(accounts.length > 0){
-                store.dispatch( set_current_account(accounts[0]) );
+                store.dispatch( set_address(accounts[0]) );
             }
             else{
                 store.dispatch( set_login_status(false) );
-                store.dispatch( set_current_account(null) );
+                store.dispatch( set_address(null) );
 
             }
         });
 
-        ethereum.on('connect', connectInfo => {
+        // ethereum.on('connect', connectInfo => {
 
-            // if(accounts[0] != null)
-            //     store.dispatch( set_current_account(accounts[0]) );
+        //     // if(accounts[0] != null)
+        //     //     store.dispatch( set_address(accounts[0]) );
 
-            // store.dispatch( set_connection(true) );
-            // console.log('cnx');
-        });
+        //     // store.dispatch( set_connection(true) );
+        //     // console.log('cnx');
+        // });
 
-        ethereum.on('disconnect', error => {
-            // store.dispatch( set_current_account('') );
-            // console.log(error);
-        });
+        // ethereum.on('disconnect', error => {
+        //     // store.dispatch( set_address('') );
+        //     // console.log(error);
+        // });
 
-        ethereum.on('chainChanged', async chainId => {
+        ethereum.on('chainChanged', async () => {
              // window.location.reload();
-            store.dispatch( set_networkd_id( await web3.eth.getChainId() ) );
+            store.dispatch( set_chain_id( await web3.eth.getChainId() ) );            
         });
-
-
-        return store;
-
     }
+
+    /* connector */
+    
+}
+
+const initStaticWeb3 = (rpcs) => {
+    rpcs.forEach(rpc => {            
+        const {chainId, url} = rpc;
+        const web3 = new Web3(url);        
+        store.dispatch( set_web3_read_instance(chainId, web3) );
+    });
 }
 
 
-export {initWeb3};
+export {initWeb3, initStaticWeb3};

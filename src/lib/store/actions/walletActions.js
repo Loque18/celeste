@@ -1,63 +1,47 @@
 import {
     // REQUEST_CONNECTION,
-    SET_NETWORK_ID,
+    SET_CHAIN_ID,
     SET_WALLET,
-    SET_CURRENT_ACCOUNT,
+    SET_ADDRESS,
     SET_LOGIN_STATUS
 } from '../constants';
 
+export const set_chain_id = id => ({type: SET_CHAIN_ID, payload: id});
+export const set_wallet = wallet => ({type: SET_WALLET, payload: wallet});
+export const set_address = address => ({type: SET_ADDRESS, payload: address});
+export const set_login_status = status => ({type: SET_LOGIN_STATUS, payload: status});
 
-export const set_networkd_id = id => {
-    return{
-        type: SET_NETWORK_ID,
-        payload: id
-    };
-}
-
-export const set_wallet = value => {
-    return{
-        type: SET_WALLET,
-        payload: value
-    };
-}
-
-export const set_current_account = address => {
-    return{
-        type: SET_CURRENT_ACCOUNT,
-        payload: address
-    };
-}
-
-export const set_login_status = value => {
-    return{
-        type: SET_LOGIN_STATUS,
-        payload: value
-    };
-}
+/*  *~~*~~*~~*~~*~~* THUNK FUNCTIONS *~~*~~*~~*~~*~~* */
 
 export const request_connection = () => {
-
     return async (dispatch, getState) => {
 
         const ethereum = window.ethereum;
-
         const {web3} = getState().web3Reducer;
 
-        
-
-
         try {
-            await ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });            
             dispatch( set_login_status(true) );
-            dispatch( set_networkd_id( await web3.eth.getChainId() ) );
+            dispatch( set_chain_id( await web3.eth.getChainId() ) );
+            dispatch( set_address( accounts[0] ) );
         } catch (e) {
             //throw e;
         }
     };
 }
 
-export const request_change_network = (networkId) => {
+export const request_disconnection = () => {
     return async (dispatch, getState) => {
+
+        dispatch( set_login_status(false) );
+        dispatch( set_wallet(null) );
+        dispatch( set_address(null) );
+    }
+}
+
+
+export const request_change_network = (networkId) => {
+    return async () => {
         
         try {
             await window.ethereum.request({
@@ -66,7 +50,7 @@ export const request_change_network = (networkId) => {
             });
 
         } catch (e) {
-            console.log("ERROR REQUESTING CHANGE NETWORK",e);
+            console.log("ERROR REQUESTING CHANGE NETWORK", e);
         }
     };
 }

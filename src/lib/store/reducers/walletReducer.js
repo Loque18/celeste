@@ -1,15 +1,15 @@
 import {
     // REQUEST_CONNECTION,
     SET_WALLET,
-    SET_NETWORK_ID,
-    SET_CURRENT_ACCOUNT,
+    SET_CHAIN_ID,
+    SET_ADDRESS,
     SET_LOGIN_STATUS,
 } from '../constants';
 
 const defaultState = {
     walletProvider: null,
-    currentAccount: null,
-    networkId: null,
+    address: null,
+    chainId: null,
     isLoggedIn: false
 };
 
@@ -23,16 +23,16 @@ const reducer = (state = defaultState, action) => {
                 walletProvider: action.payload
             };
 
-        case SET_NETWORK_ID:
+        case SET_CHAIN_ID:
             return{
                 ...state,
-                networkId: action.payload
+                chainId: action.payload
             };
 
-        case SET_CURRENT_ACCOUNT:
+        case SET_ADDRESS:
             return{
                 ...state,
-                currentAccount: action.payload
+                address: action.payload
             };
 
         case SET_LOGIN_STATUS:

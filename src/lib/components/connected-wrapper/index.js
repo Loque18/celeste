@@ -18,7 +18,8 @@ const ConnectedWrapper = props => {
     );
 }
 
-ConnectedWrapper.propTypes = {    
+ConnectedWrapper.propTypes = {
+    children: PropTypes.node,
     disconnectedComponent: PropTypes.element.isRequired    
 };
 

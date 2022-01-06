@@ -1,27 +1,29 @@
-import React, {Fragment} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { useCelesteDispatch } from "../celeste-provider";
 import {request_change_network} from '../../store/actions/walletActions';
 
-const SwithNetworkButton = props => {
+const SwithNetworkButton = ({children, chainId, className, ...rest}) => {
 
     const dispatch = useCelesteDispatch();
 
     const onClick = () => {        
-        dispatch(request_change_network(props.networkId));
+        dispatch(request_change_network(chainId));
     }
     
     return(
-        <button className={props.className} onClick={onClick}>
-            {props.children}
+        <button className={className} onClick={onClick} {...rest}>
+            {children}
         </button>
     );
 };
 
 
 SwithNetworkButton.propTypes = {
-    networkId: PropTypes.number.isRequired    
+    children: PropTypes.node,
+    className: PropTypes.string,
+    chainId: PropTypes.number.isRequired    
 };
 
 export default SwithNetworkButton;
