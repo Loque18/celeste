@@ -1,29 +1,28 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import PropTypes from "prop-types";
 
 import { useCelesteDispatch } from "../celeste-provider";
-import {request_change_network} from '../../store/actions/walletActions';
+import { request_change_network } from "../../store/actions/walletActions";
 
-const SwithNetworkButton = ({children, chainId, className, ...rest}) => {
+const SwithNetworkButton = ({ children, chainId, className, ...rest }) => {
+	const dispatch = useCelesteDispatch();
 
-    const dispatch = useCelesteDispatch();
+	const onClick = () => {
+		dispatch(request_change_network(chainId));
+	};
 
-    const onClick = () => {        
-        dispatch(request_change_network(chainId));
-    }
-    
-    return(
-        <button className={className} onClick={onClick} {...rest}>
-            {children}
-        </button>
-    );
+	return (
+		<button className={className} onClick={onClick} {...rest} type="button">
+			{children}
+		</button>
+	);
 };
 
-
 SwithNetworkButton.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-    chainId: PropTypes.number.isRequired    
+	children: PropTypes.node,
+	className: PropTypes.string,
+	chainId: PropTypes.number.isRequired,
 };
 
 export default SwithNetworkButton;

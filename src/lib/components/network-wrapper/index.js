@@ -1,28 +1,19 @@
-import React, {Fragment} from "react";
+/* eslint-disable eqeqeq */
+import React from "react";
 import PropTypes from "prop-types";
 
 import { useCelesteSelector } from "../celeste-provider";
 
-const NetworkWrapper = props => {
+const NetworkWrapper = ({ chainId, children, info }) => {
+	const { walletReducer } = useCelesteSelector(state => state);
 
-    const {walletReducer} = useCelesteSelector(state => state);    
-    
-    return(
-        <Fragment>
-            {
-                props.chainIds.includes(walletReducer.chainId) ?
-                    props.children
-                :
-                    <div>{props.info}</div>
-            }            
-        </Fragment>
-    );
+	return chainId == walletReducer.chainId ? children : <div>{info}</div>;
 };
 
 NetworkWrapper.propTypes = {
-    children: PropTypes.node,
-    chainIds: PropTypes.arrayOf(PropTypes.number).isRequired,    
-    info: PropTypes.element
+	children: PropTypes.node,
+	chainId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	info: PropTypes.element,
 };
 
 export default NetworkWrapper;

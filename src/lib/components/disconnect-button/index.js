@@ -1,32 +1,35 @@
-import React from 'react';
-import PropTypes  from 'prop-types';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from "react";
+import PropTypes from "prop-types";
 
-import { useCelesteDispatch, useCelesteSelector } from '../celeste-provider';
-import { request_disconnection } from '../../store/actions/walletActions';
+import { useCelesteDispatch, useCelesteSelector } from "../celeste-provider";
+import { request_disconnection } from "../../store/actions/walletActions";
 
-const DisconnectBtn = ({className, children, ...rest}) => {
-        
-    const dispatch = useCelesteDispatch();
-    const wallet = useCelesteSelector(state => state.walletReducer);
+const DisconnectBtn = ({ className, children, ...rest }) => {
+	const dispatch = useCelesteDispatch();
+	const wallet = useCelesteSelector(state => state.walletReducer);
 
-    const onClick = () => {
-        if(wallet.isLoggedIn)
-            dispatch(request_disconnection());
-    }   
+	const onClick = () => {
+		if (wallet.isLoggedIn) dispatch(request_disconnection());
+	};
 
-    return(
-        <div>
-            <button className={className} onClick={onClick} {...rest}>
-                {children || 'Disconnect wallet'}
-            </button>
-        </div>
-    );
-
-}
+	return (
+		<div>
+			<button
+				className={className}
+				onClick={onClick}
+				{...rest}
+				type="button"
+			>
+				{children || "Disconnect wallet"}
+			</button>
+		</div>
+	);
+};
 
 DisconnectBtn.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string
-}    
+	children: PropTypes.node,
+	className: PropTypes.string,
+};
 
 export default DisconnectBtn;

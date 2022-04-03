@@ -1,7 +1,7 @@
 /* *~~*~~*~~*~~*~~*~~*~~*~~*~~* export *~~*~~*~~*~~*~~*~~*~~*~~*~~*~~* */ 
 
-import CelesteProvider from './components/celeste-provider';
-import {useCelesteStore, useCelesteDispatch, useCelesteSelector} from './components/celeste-provider';
+import CelesteProvider, {useCelesteStore, useCelesteDispatch, useCelesteSelector} from './components/celeste-provider';
+
 import ConnectButton from './components/connect-button';
 import DisconnectButton from './components/disconnect-button';
 import ConnectedWrapper from './components/connected-wrapper';

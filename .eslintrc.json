@@ -1,0 +1,19 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["plugin:react/recommended", "airbnb", "prettier"],
+
+	"plugins": ["react"],
+	"rules": {
+		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+		"react/react-in-jsx-scope": "off",
+		"react/function-component-definition": "off",
+		"react/require-default-props": "off",
+		"camelcase": "off",
+		"import/no-unresolved": [2, { "commonjs": true, "amd": true }],
+		"arrow-body-style": "off",
+		"react/prop-types": "off"
+	}
+}

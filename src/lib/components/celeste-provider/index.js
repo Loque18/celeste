@@ -1,13 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import store from '../../store';
 import {
-  Provider,
-  createStoreHook,
-  createDispatchHook,
-  createSelectorHook
-} from 'react-redux';
+	Provider,
+	createStoreHook,
+	createDispatchHook,
+	createSelectorHook,
+} from "react-redux";
+
+import store from "../../store";
 
 const MyContext = React.createContext(null);
 
@@ -16,16 +17,16 @@ export const useCelesteStore = createStoreHook(MyContext);
 export const useCelesteDispatch = createDispatchHook(MyContext);
 export const useCelesteSelector = createSelectorHook(MyContext);
 
-const CelesteProvider= props => {    
-    return (
-        <Provider context={MyContext} store={store}>
-            {props.children}
-        </Provider>
-    );
-}
+const CelesteProvider = ({ children }) => {
+	return (
+		<Provider context={MyContext} store={store}>
+			{children}
+		</Provider>
+	);
+};
 
 CelesteProvider.propTypes = {
-    children: PropTypes.node
-}
+	children: PropTypes.node,
+};
 
 export default CelesteProvider;
